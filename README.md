@@ -22,37 +22,38 @@ The easiest way is to create a `.env` file in your working directory eg.:
 ```ini
 cut > .env <<EOF
 POSTGRES_PASSWORD=*****
+LETSENCRYPT_HOST=workshop.8gears.com
 VIRTUAL_HOST=workshop.8gears.com
 LETSENCRYPT_EMAIL=user@domain.com
 EOF
 ```
 
 ### Step 2 - Populate DB
+
 Copy the `docker-compose.yml` from this repository to your computer.
 
 Run the service `init-guac-db` once before starting all other services. This one off job will export the application database schema so Postgres can pick it up when it starts and initialize the database with values and schema for Guacamole.
 
+```sh
+docker compose up init-guac-db
 ```
-docker-compose up init-guac-db
-```
+
 The job should start and terminate after the schema is created:
 
-
-### Step 3 - Start Guacamole and other Services:
+### Step 3 - Start Guacamole and other Services
 
 Finally we can start Guacamole.
 
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
-Now go to your application https://workshop.domain.org/guacamole and login as guacadmin/guacadmin. 
+Now go to your application <https://workshop.domain.org/guacamole> and login as guacadmin/guacadmin.
 Don't forget to change the password in the next step.
-
 
 ## Advanced Topics
 
 ### Extension
 
-It is possible to add extensions (.jar) to this compose project. 
-See a [working example](https://github.com/8gears/containerized-guacamole/issues/3#issuecomment-932015027) from contributor @marekschneider.   
+It is possible to add extensions (.jar) to this compose project.
+See a [working example](https://github.com/8gears/containerized-guacamole/issues/3#issuecomment-932015027) from contributor @marekschneider.

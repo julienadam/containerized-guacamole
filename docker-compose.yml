@@ -2,8 +2,6 @@
 # Apache Guacamole with NGIXN reverse proxy and Let's Encrypt.
 # For more details see: https://github.com/8gears/containerized-guacamole
 # 
-version: '3'
-
 services:
   nginx:
     image: jwilder/nginx-proxy:alpine
@@ -37,6 +35,7 @@ services:
   init-guac-db:
     image: guacamole/guacamole:latest
     command: ["/bin/sh", "-c", "test -e /init/initdb.sql && echo 'init file already exists' || /opt/guacamole/bin/initdb.sh --postgresql > /init/initdb.sql" ]
+    user: root
     volumes:
       - dbinit:/init    
 
